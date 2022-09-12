@@ -1,4 +1,4 @@
-package com.example.FarmMarket.Controllers;
+package com.example.FarmMarket.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
