@@ -15,23 +15,20 @@
 
 <body>
 
-<div class="container-fluid">
-    <div class="d-flex"
-         style="height: 250px; background-image:url(/img/fonstola.jpg); background-size:cover; background-position:center center">
-        <div class="d-flex my-auto ms-5">
-            <div>
-                <h1 style="color:green">Фермерские продукты</h1>
-                <!--
-                <h2>КФХ Овчинникова ВА</h2>
-                -->
-            </div>
+<div class="container-fluid d-flex"
+     style="height: 250px; background-image:url(/img/fonstola.jpg); background-size:cover; background-position:center center">
+    <div class="d-flex my-auto ms-5">
+        <div>
+            <h1 style="color:green">Фермерские продукты</h1>
+            <!--
+            <h2>КФХ Овчинникова ВА</h2>
+            -->
         </div>
     </div>
 </div>
-
-<div class="sticky-top">
+<div class="container-fluid sticky-top" th:fragment="menu">
     <nav class="navbar navbar-expand-lg bg-light ">
-        <div class="container-fluid">
+        <div class="container-xl">
             <a class="navbar-brand" href="#">КФХ Овчинникова ВА</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -74,10 +71,18 @@
         </div>
     </nav>
 </div>
+
+<div class="container-xl">
+
+</div>
+
+
+
 <div>
     <svg width="250" height="250">
         <pattern id="pattern" width="100%" height="100%">
-            <image xlink:href="https://omiliya.org/sites/default/files/img_articles/5_2.jpeg" width="250" height="250"
+            <image xlink:href="https://omiliya.org/sites/default/files/img_articles/5_2.jpeg" width="250"
+                   height="250"
                    preserveAspectRatio="xMidYMin slice"></image>
         </pattern>
         <circle cx="125" cy="125" r="100" fill="url(#pattern)"></circle>
@@ -86,7 +91,8 @@
 <div>
     <svg width="250" height="250">
         <pattern id="pattern" width="100%" height="100%">
-            <image xlink:href="https://omiliya.org/sites/default/files/img_articles/5_2.jpeg" width="250" height="250"
+            <image xlink:href="https://omiliya.org/sites/default/files/img_articles/5_2.jpeg" width="250"
+                   height="250"
                    preserveAspectRatio="xMidYMin slice"></image>
         </pattern>
         <circle cx="125" cy="125" r="100" fill="url(#pattern)"></circle>
@@ -95,21 +101,14 @@
 <div>
     <svg width="250" height="250">
         <pattern id="pattern" width="100%" height="100%">
-            <image xlink:href="https://omiliya.org/sites/default/files/img_articles/5_2.jpeg" width="250" height="250"
+            <image xlink:href="https://omiliya.org/sites/default/files/img_articles/5_2.jpeg" width="250"
+                   height="250"
                    preserveAspectRatio="xMidYMin slice"></image>
         </pattern>
         <circle cx="125" cy="125" r="100" fill="url(#pattern)"></circle>
     </svg>
 </div>
-<div>
-    <svg width="250" height="250">
-        <pattern id="pattern" width="100%" height="100%">
-            <image xlink:href="https://omiliya.org/sites/default/files/img_articles/5_2.jpeg" width="250" height="250"
-                   preserveAspectRatio="xMidYMin slice"></image>
-        </pattern>
-        <circle cx="125" cy="125" r="100" fill="url(#pattern)"></circle>
-    </svg>
-</div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
