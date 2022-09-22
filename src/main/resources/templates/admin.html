@@ -10,8 +10,74 @@
 <body>
 <div th:replace="home::menu"></div>
 
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-2">
+            <div class="d-flex justify-content-center">
+                <nav class="nav flex-column">
+                    <a class="nav-link active" aria-current="page" href="admin/categories">Категории</a>
+                    <a class="nav-link" href="#">Продукты</a>
+                </nav>
+            </div>
+        </div>
+        <div class="col-10">
+            <div class="d-flex">
+                <form method="post" action="addCategory">
+                    <div class="mb-3">
+                        <input type="text" name="category" class="form-control form-control-label" id="category"
+                               placeholder="Введите категорию">
+                    </div>
+                    <!--
+                    <div class="mb-3">
+                        <input class="form-control" type="file" id="formFile">
+                    </div>
+                    -->
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </form>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Фото</th>
+                    <th scope="col">Категория</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="category : ${categories}">
+                    <th scope="row">1</th>
+                    <td th:text="${category.category}"></td>
+                    <td><a th:href="@{delCategory(id=${category.id})}" th:text="Удалить"></a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Добавление товара и категории
+
+<div>Добавьте товар</div>
+<div class="d-flex">
+    <p>Категория:</p>
+    <form action="addCategory" method="post">
+        <input type="text" name="category" placeholder="Введите категорию"/>
+        <button type="submit">Добавить</button>
+    </form>
+</div>
+<div class="d-flex">
+    <p>Продукт:</p>
+    <form method="post" action="addProduct">
+        <input type="text" name="product" placeholder="Введите продукт">
+        <input type="number" name="price" placeholder="Введите цену">
+        <button type="submit">Добавить</button>
+    </form>
+</div>
+-->
 
 
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
 </body>
 </html>

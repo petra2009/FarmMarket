@@ -38,35 +38,44 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Главная</a>
+                        <a class="nav-link active" aria-current="page" href="#">Наша продукцыя</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Ссылка</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            Выпадающий список
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Действие</a></li>
-                            <li><a class="dropdown-item" href="#">Другое действие</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li>
-                        </ul>
+                        <a class="nav-link" href="#">Сотрудничество</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled">Отключенная</a>
+                        <a class="nav-link" href="#">Контакты</a>
                     </li>
                 </ul>
-                <!--
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
-                    <button class="btn btn-outline-success" type="submit">Поиск</button>
-                </form>
-                -->
+                <div>
+                    <!-- <button class="btn btn-primary me-md-2" type="button">Корзина</button> -->
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false" data-bs-auto-close="outside">Корзина</button>
+                        <form class="dropdown-menu p-1 dropdown-menu-end" style="width:500px">
+                            <div class="mb-3">
+                                <label for="exampleDropdownFormEmail2" class="form-label">Адрес электронной почты</label>
+                                <input type="email" class="form-control" id="exampleDropdownFormEmail2"
+                                       placeholder="email@example.com">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleDropdownFormPassword2" class="form-label">Пароль</label>
+                                <input type="password" class="form-control" id="exampleDropdownFormPassword2"
+                                       placeholder="Password">
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="dropdownCheck2">
+                                    <label class="form-check-label" for="dropdownCheck2">
+                                        Запомнить меня
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Войти</button>
+                        </form>
+                    </div>
+                </div>
+
             </div>
         </div>
     </nav>
@@ -75,7 +84,6 @@
 <div class="container-xl">
 
 </div>
-
 
 
 <div>
