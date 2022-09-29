@@ -15,23 +15,23 @@
         <div class="col-2">
             <div class="d-flex justify-content-center">
                 <nav class="nav flex-column">
-                    <a class="nav-link active" aria-current="page" href="admin/categories">Категории</a>
+                    <a class="nav-link active" aria-current="page" href="/admin/categories">Категории</a>
                     <a class="nav-link" href="#">Продукты</a>
                 </nav>
             </div>
         </div>
         <div class="col-10">
             <div class="d-flex">
-                <form method="post" action="addCategory">
+                <form method="post" th:action="@{/admin/addCategory}" enctype="multipart/form-data">
                     <div class="mb-3">
                         <input type="text" name="category" class="form-control form-control-label" id="category"
                                placeholder="Введите категорию">
                     </div>
-                    <!--
+
                     <div class="mb-3">
-                        <input class="form-control" type="file" id="formFile">
+                        <input class="form-control" type="file" name="file" id="formFile">
                     </div>
-                    -->
+
                     <button type="submit" class="btn btn-primary">Добавить</button>
                 </form>
             </div>
@@ -45,12 +45,17 @@
                 </thead>
                 <tbody>
                 <tr th:each="category : ${categories}">
-                    <th scope="row">1</th>
+                    <td>
+                        <div th:unless="${category.filename==null}">
+                            <img th:src="@{/img/{filename} (filename=${category.filename})}">
+                        </div>
+                    </td>
                     <td th:text="${category.category}"></td>
                     <td><a th:href="@{delCategory(id=${category.id})}" th:text="Удалить"></a></td>
                 </tr>
                 </tbody>
             </table>
+
         </div>
     </div>
 </div>

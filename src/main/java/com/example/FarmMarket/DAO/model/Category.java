@@ -20,4 +20,10 @@ public class Category extends BaseEntity{
     @Column(name = "category")
     private String category;
 
+    @Column(name="filename")
+    private String filename;
+
+    public Category(String category) {
+        this.category = category;
+    }
 }
