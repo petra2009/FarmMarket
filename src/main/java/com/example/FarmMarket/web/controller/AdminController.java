@@ -30,63 +30,84 @@ public class AdminController {
 
     @Autowired
     private CategoryRepository categoryRepository;
-//    private ProductRepository productRepository;
-/*
+    private ProductRepository productRepository;
 
     public AdminController(CategoryRepository categoryRepository, ProductRepository productRepository) {
         this.categoryRepository = categoryRepository;
         this.productRepository = productRepository;
     }
-*/
 
-//  Ввод категории и продукта
-
+//  Сохранение категории
     @PostMapping("addCategory")
     private String addCategory(@RequestParam String category,
                                @RequestParam("file") MultipartFile file) throws IOException {
-        Category category1 = new Category(category);
-
+        Category tempCategory = new Category(category);
         if (file != null) {
-
             File uploadDir = new File(uploadPath);
             if (!uploadDir.exists()) {
                 uploadDir.mkdir();
             }
             String uuidFile = UUID.randomUUID().toString();
             String resultFilename = uuidFile + "." + file.getOriginalFilename();
-
             file.transferTo(new File(uploadPath + "/" + resultFilename));
-
-            category1.setFilename(resultFilename);
+            tempCategory.setFilename(resultFilename);
         }
-        categoryRepository.save(category1);
+        categoryRepository.save(tempCategory);
         return "redirect:categories";
     }
 
+    // Удаление категории
     @GetMapping("delCategory{id}")
-    private String delCategory(@RequestParam("id") int id) {
+    private String delCategory(@RequestParam("id") Integer id) {
         categoryRepository.deleteById(id);
         return "redirect:categories";
     }
 
+    //Вывод списка категорий
     @GetMapping("categories")
-    private String getAdminPage(Model model) {
+    private String getAdminPageCategories(Model model) {
         Iterable<Category> categories = categoryRepository.findAll();
         model.addAttribute("categories", categories);
         return "admin";
     }
-/*
 
+    //Сохранение продукта
     @PostMapping("/addProduct")
     private String addProduct(@RequestParam String product,
-                               @RequestParam BigDecimal price) {
-        Product product1 = new Product(product, price);
-        productRepository.save(product1);
+                              @RequestParam String title,
+                              @RequestParam BigDecimal price,
+                              @RequestParam Category category,
+                              @RequestParam("file") MultipartFile file) throws IOException {
+        Product tempProduct = new Product(product, title, price, category);
+        if (file != null) {
+            File uploadDir = new File(uploadPath);
+            if (!uploadDir.exists()) {
+                uploadDir.mkdir();
+            }
+            String uuidFile = UUID.randomUUID().toString();
+            String resultFilename = uuidFile + "." + file.getOriginalFilename();
+            file.transferTo(new File(uploadPath + "/" + resultFilename));
+            tempProduct.setFilename(resultFilename);
+        }
+        productRepository.save(tempProduct);
+        return "redirect:products";
+    }
+
+    //Вывод списка продуктов и категорий для формы заполнения
+    @GetMapping("products")
+    private String getAdminPageProducts(Model modelProducts, Model modelCategorySelect) {
+        Iterable<Product> products = productRepository.findAll();
+        modelProducts.addAttribute("products", products);
+        Iterable<Category> categorySelect = categoryRepository.findAll();
+        modelCategorySelect.addAttribute("categorySelect", categorySelect);
         return "admin";
     }
-*/
 
-
-
+    // Удаление продукта
+    @GetMapping("delProduct{id}")
+    private String delProduct(@RequestParam("id") Integer id) {
+        productRepository.deleteById(id);
+        return "redirect:products";
+    }
 
 }

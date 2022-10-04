@@ -12,29 +12,33 @@
 
 <div class="container mt-3">
     <div class="row">
-        <div class="col-2">
+        <div class="col-2 bg-primary">
             <div class="d-flex justify-content-center">
                 <nav class="nav flex-column">
                     <a class="nav-link active" aria-current="page" href="/admin/categories">Категории</a>
-                    <a class="nav-link" href="#">Продукты</a>
+                    <a class="nav-link" href="/admin/products">Продукты</a>
                 </nav>
             </div>
         </div>
-        <div class="col-10">
+
+        <!-- Категории -->
+
+        <div class="col-10" th:unless=${categories==null}>
             <div class="d-flex">
                 <form method="post" th:action="@{/admin/addCategory}" enctype="multipart/form-data">
                     <div class="mb-3">
                         <input type="text" name="category" class="form-control form-control-label" id="category"
                                placeholder="Введите категорию">
                     </div>
-
                     <div class="mb-3">
-                        <input class="form-control" type="file" name="file" id="formFile">
+                        <input class="form-control" type="file" name="file" id="formFileCategory">
                     </div>
-
                     <button type="submit" class="btn btn-primary">Добавить</button>
                 </form>
             </div>
+
+            <!-- Вывод категорий -->
+
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -47,7 +51,7 @@
                 <tr th:each="category : ${categories}">
                     <td>
                         <div th:unless="${category.filename==null}">
-                            <img th:src="@{/img/{filename} (filename=${category.filename})}">
+                            <img th:src="@{/img/{filename} (filename=${category.filename})}" width="50" height="50">
                         </div>
                     </td>
                     <td th:text="${category.category}"></td>
@@ -55,9 +59,81 @@
                 </tr>
                 </tbody>
             </table>
+        </div>
 
+        <!-- Продукты -->
+
+        <div class="col-10 bg-secondary" th:unless=${products==null}>
+            <div class="d-flex bg-success">
+                <form class="container" method="post" th:action="@{/admin/addProduct}" enctype="multipart/form-data">
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-2">
+                                <select type="text" name="category" class="form-select form-select-label"
+                                        id="categoryId">
+                                    <option selected>Выберети категорию...</option>
+                                    <div th:each="cat : ${categorySelect}">
+                                        <option th:value="${cat.id}" th:text="${cat.category}"></option>
+                                    </div>
+                                </select>
+                            </div>
+                            <div class="mb-2">
+                                <input type="text" name="product" class="form-control form-control-label"
+                                       id="product"
+                                       placeholder="Введите продукт"/>
+                            </div>
+                            <div class="mb-2">
+                                <input type="number" name="price" class="form-control form-control-label"
+                                       id="price" step="0.01"
+                                       placeholder="Введите цену">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-2">
+                                    <textarea type="text" name="title" class="form-control form-control-label"
+                                              id="productTitle" rows="3"
+                                              placeholder="Описание товара"></textarea>
+                            </div>
+                            <div class="mb-2">
+                                <input class="form-control" type="file" name="file" id="formFileProduct">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Добавить</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <!-- Ввывод продуктов -->
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Фото</th>
+                    <th scope="col">Продукт</th>
+                    <th scope="col">Описание</th>
+                    <th scope="col">Цена</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product : ${products}">
+                    <td>
+                        <div th:unless="${product.filename==null}">
+                            <img th:src="@{/img/{filename} (filename=${product.filename})}" width="50" height="50">
+                        </div>
+                    </td>
+                    <td th:text="${product.product}"></td>
+                    <td th:text="${product.title}"></td>
+                    <td th:text="${product.price}"></td>
+                    <td><a th:href="@{delProduct(id=${product.id})}" th:text="Удалить"></a></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+
 </div>
 
 <!-- Добавление товара и категории

@@ -4,11 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CascadeType;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,13 +21,24 @@ public class Product extends BaseEntity {
     @Column(name="product")
     private String product;
 
+    @Column(name="title")
+    private String title;
+
     @Column(name="price")
     private BigDecimal price;
 
-    //    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "products_categories",
-//                joinColumns = @JoinColumn(name="product_id"),
-//                inverseJoinColumns = @JoinColumn(name = "category_id"))
-//    private List<Category> categories;
+    @Column(name="filename")
+    private String filename;
+
+    public Product(String product, String title, BigDecimal price, Category category) {
+        this.product = product;
+        this.title = title;
+        this.price = price;
+        this.category = category;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
 }
