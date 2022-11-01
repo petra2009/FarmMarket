@@ -78,18 +78,18 @@ public class AdminController {
                               @RequestParam BigDecimal price,
                               @RequestParam Category category,
                               @RequestParam("file") MultipartFile file) throws IOException {
-        Product tempProduct = new Product(product, title, price, category);
+        Product newProduct = new Product(product, title, price, category);
         if (file != null) {
             File uploadDir = new File(uploadPath);
             if (!uploadDir.exists()) {
-                uploadDir.mkdir();
+                uploadDir.mkdir();                  //создание директории для картинок
             }
-            String uuidFile = UUID.randomUUID().toString();
+            String uuidFile = UUID.randomUUID().toString();         //новое имя для картинок
             String resultFilename = uuidFile + "." + file.getOriginalFilename();
-            file.transferTo(new File(uploadPath + "/" + resultFilename));
-            tempProduct.setFilename(resultFilename);
+            file.transferTo(new File(uploadPath + "/" + resultFilename));   //загрузка картинок
+            newProduct.setFilename(resultFilename);
         }
-        productRepository.save(tempProduct);
+        productRepository.save(newProduct);
         return "redirect:products";
     }
 

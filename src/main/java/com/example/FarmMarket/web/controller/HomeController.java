@@ -53,12 +53,12 @@ public class HomeController {
     @GetMapping("/{category}")
     private String getFilter (@PathVariable("category") String category,
                               Model categoryModel,
-                              Model productsmodel)  {
+                              Model productsModel)  {
         Iterable<Category> categories = categoryRepository.findAll();
         Category categoryId = categoryRepository.findByCategory(category);
         List<Product> products = productRepository.findAllByCategory(categoryId);
         categoryModel.addAttribute("categories", categories);
-        productsmodel.addAttribute("products", products);
+        productsModel.addAttribute("products", products);
         return "home";
     }
 
