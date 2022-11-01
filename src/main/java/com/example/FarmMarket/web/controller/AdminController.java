@@ -42,17 +42,17 @@ public class AdminController {
     private String addCategory(@RequestParam String category,
                                @RequestParam("file") MultipartFile file) throws IOException {
         Category tempCategory = new Category(category);
-        if (file != null) {
-            File uploadDir = new File(uploadPath);
+        if (file != null) {     // проверяет добавлена ли картинка
+            File uploadDir = new File(uploadPath);  // проверяет есть ли папка
             if (!uploadDir.exists()) {
-                uploadDir.mkdir();
+                uploadDir.mkdir();      //если нет то создание директории для картинок
             }
-            String uuidFile = UUID.randomUUID().toString();
-            String resultFilename = uuidFile + "." + file.getOriginalFilename();
-            file.transferTo(new File(uploadPath + "/" + resultFilename));
-            tempCategory.setFilename(resultFilename);
+            String uuidFile = UUID.randomUUID().toString();     //генерирует произвольной суффикс
+            String resultFilename = uuidFile + "." + file.getOriginalFilename();  // добавляет новый суффикс к имени файла
+            file.transferTo(new File(uploadPath + "/" + resultFilename)); //загрузка картинок в папку указаную в upload.path
+            tempCategory.setFilename(resultFilename); // сохраняет новое имя файла в БД
         }
-        categoryRepository.save(tempCategory);
+        categoryRepository.save(tempCategory); // сохраняет категорию в БД
         return "redirect:categories";
     }
 
