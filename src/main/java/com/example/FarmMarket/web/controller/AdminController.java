@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import static java.util.UUID.randomUUID;
 
 @Controller
 @RequestMapping("/admin")
