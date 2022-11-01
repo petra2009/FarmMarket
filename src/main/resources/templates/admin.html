@@ -12,7 +12,7 @@
 
 <div class="container mt-3">
     <div class="row">
-        <div class="col-2 bg-primary">
+        <div class="col-2">
             <div class="d-flex justify-content-center">
                 <nav class="nav flex-column">
                     <a class="nav-link active" aria-current="page" href="/admin/categories">Категории</a>
@@ -63,8 +63,8 @@
 
         <!-- Продукты -->
 
-        <div class="col-10 bg-secondary" th:unless=${products==null}>
-            <div class="d-flex bg-success">
+        <div class="col-10" th:unless=${products==null}>
+            <div class="d-flex">
                 <form class="container" method="post" th:action="@{/admin/addProduct}" enctype="multipart/form-data">
 
                     <div class="row">
