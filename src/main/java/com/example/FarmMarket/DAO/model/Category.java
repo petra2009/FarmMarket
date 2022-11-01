@@ -34,7 +34,7 @@ public class Category extends BaseEntity{
 
     @Override
     public String toString() {
-        return "Category{" +
+        return "Category {" +
                 "category='" + category + '\'' +
                 ", filename='" + filename + '\'' +
                 ", products=" + products +
