@@ -1,4 +1,4 @@
-package com.example.FarmMarket.web.controller.config;
+package com.example.FarmMarket.web.config;
 
 import com.example.FarmMarket.service.UserService;
 import org.springframework.context.annotation.Configuration;

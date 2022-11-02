@@ -23,7 +23,7 @@ img/
 *.ipr
 qwe
 *.txt
-*.properties
+application.properties
 
 ### NetBeans ###
 /nbproject/private/

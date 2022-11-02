@@ -1,4 +1,4 @@
-package com.example.FarmMarket.web.controller.config;
+package com.example.FarmMarket.web.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
