@@ -18,7 +18,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> findAllByCategory(Category category) {
-        return null;
+        return productRepository.findAllByCategory(category);
     }
 
     @Override
@@ -27,8 +27,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public Iterable<Product> findAll() {
-        Iterable<Product> products = productRepository.findAll();
-        return products;
+        return productRepository.findAll();
     }
 
     public void deleteById(int id) {

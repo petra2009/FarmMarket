@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface ProductService {
 
-    List<Product> findAllByCategory(Category category);
+    void deleteById(int id);
 
     void save(Product product);
 
     Iterable<Product> findAll();
 
-    void deleteById(int id);
+    List<Product> findAllByCategory(Category category);
 }

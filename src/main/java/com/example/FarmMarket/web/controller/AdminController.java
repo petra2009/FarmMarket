@@ -31,8 +31,8 @@ public class AdminController {
     private String uploadPath;
 
     @Autowired
-    private CategoryService categoryService;
-    private ProductService productService;
+    private final CategoryService categoryService;
+    private final ProductService productService;
 
 
     public AdminController(CategoryService categoryService, ProductService productService) {
@@ -44,7 +44,7 @@ public class AdminController {
     @PostMapping("addCategory")
     private String addCategory(@RequestParam String category,
                                @RequestParam("file") MultipartFile file) throws IOException {
-        Category tempCategory = new Category(category);
+        Category newCategory = new Category(category);
         if (file != null) {     // проверяет добавлена ли картинка
             File uploadDir = new File(uploadPath);  // проверяет есть ли папка
             if (!uploadDir.exists()) {
@@ -53,9 +53,9 @@ public class AdminController {
             String uuidFile = UUID.randomUUID().toString();     //генерирует произвольной суффикс
             String resultFilename = uuidFile + "." + file.getOriginalFilename();  // добавляет новый суффикс к имени файла
             file.transferTo(new File(uploadPath + "/" + resultFilename)); //загрузка картинок в папку указаную в upload.path
-            tempCategory.setFilename(resultFilename); // сохраняет новое имя файла в БД
+            newCategory.setFilename(resultFilename); // сохраняет новое имя файла в БД
         }
-        categoryService.save(tempCategory); // сохраняет категорию в БД
+        categoryService.save(newCategory); // сохраняет категорию в БД
         return "redirect:categories";
     }
 
@@ -69,7 +69,6 @@ public class AdminController {
     //Вывод списка категорий
     @GetMapping("categories")
     private String getAdminPageCategories(Model model) {
-        //Iterable<Category> categories = categoryService.findAll();
         model.addAttribute("categories", categoryService.findAll());
         return "admin";
     }
@@ -99,9 +98,7 @@ public class AdminController {
     //Вывод списка продуктов и категорий для формы заполнения
     @GetMapping("products")
     private String getAdminPageProducts(Model modelProducts, Model modelCategorySelect) {
-        //Iterable<Product> products = productService.findAll();
         modelProducts.addAttribute("products", productService.findAll());
-        //Iterable<Category> categorySelect = categoryService.findAll();
         modelCategorySelect.addAttribute("categorySelect", categoryService.findAll());
         return "admin";
     }

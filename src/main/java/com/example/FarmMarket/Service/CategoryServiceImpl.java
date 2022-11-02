@@ -20,8 +20,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category findByCategory(String category) {
-
-        return null;
+        return categoryRepository.findByCategory(category);
     }
 
     @Override
@@ -31,8 +30,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Iterable<Category> findAll() {
-        Iterable<Category> categories = categoryRepository.findAll();
-        return categories;
+        return categoryRepository.findAll();
     }
 
 }

@@ -4,6 +4,8 @@ import com.example.FarmMarket.DAO.model.Category;
 import com.example.FarmMarket.DAO.model.Product;
 import com.example.FarmMarket.DAO.repository.CategoryRepository;
 import com.example.FarmMarket.DAO.repository.ProductRepository;
+import com.example.FarmMarket.Service.CategoryService;
+import com.example.FarmMarket.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -23,19 +25,14 @@ public class HomeController {
     private String uploadPath;
 
     @Autowired
-    private CategoryRepository categoryRepository;
-    private ProductRepository productRepository;
+    private final CategoryService categoryService;
+    private final ProductService productService;
 
 
-    public HomeController(CategoryRepository categoryRepository, ProductRepository productRepository) {
-        this.categoryRepository = categoryRepository;
-        this.productRepository = productRepository;
+    public HomeController(CategoryService categoryService, ProductService productService) {
+        this.categoryService = categoryService;
+        this.productService = productService;
     }
-
-    /* @GetMapping("/")
-    public String getFirstPage() {
-        return "home";
-    }*/
 
     @GetMapping("/admin")
     public String getAdminPage() {
@@ -44,8 +41,8 @@ public class HomeController {
 
     @GetMapping("")
     private String getAdminPage(Model productsModel, Model categoryModel) {
-        Iterable<Category> categories = categoryRepository.findAll();
-        Iterable<Product> products = productRepository.findAll();
+        Iterable<Category> categories = categoryService.findAll();
+        Iterable<Product> products = productService.findAll();
         categoryModel.addAttribute("categories", categories);
         productsModel.addAttribute("products", products);
         return "home";
@@ -54,9 +51,9 @@ public class HomeController {
     private String getFilter (@PathVariable("category") String category,
                               Model categoryModel,
                               Model productsModel)  {
-        Iterable<Category> categories = categoryRepository.findAll();
-        Category categoryId = categoryRepository.findByCategory(category);
-        List<Product> products = productRepository.findAllByCategory(categoryId);
+        Iterable<Category> categories = categoryService.findAll();
+        Category categoryId = categoryService.findByCategory(category);
+        List<Product> products = productService.findAllByCategory(categoryId);
         categoryModel.addAttribute("categories", categories);
         productsModel.addAttribute("products", products);
         return "home";

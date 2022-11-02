@@ -12,6 +12,4 @@ public interface CategoryService {
 
     Iterable<Category> findAll();
 
-
-
 }
