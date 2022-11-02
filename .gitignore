@@ -22,6 +22,7 @@ target/
 *.ipr
 qwe
 *.txt
+*.properties
 
 ### NetBeans ###
 /nbproject/private/
