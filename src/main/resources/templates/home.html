@@ -60,26 +60,11 @@
                                 aria-expanded="false" data-bs-auto-close="outside">Корзина
                         </button>
                         <form class="dropdown-menu p-1 dropdown-menu-end" style="width:500px">
-                            <div class="mb-3">
-                                <label for="exampleDropdownFormEmail2" class="form-label">Адрес электронной
-                                    почты</label>
-                                <input type="email" class="form-control" id="exampleDropdownFormEmail2"
-                                       placeholder="email@example.com">
+                            <div th:each="productIndex : ${basket}">
+                                <p th:each="prod : ${productIndex}"  th:text="${prod.product} + ${prod.price}"></p>
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleDropdownFormPassword2" class="form-label">Пароль</label>
-                                <input type="password" class="form-control" id="exampleDropdownFormPassword2"
-                                       placeholder="Password">
-                            </div>
-                            <div class="mb-3">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="dropdownCheck2">
-                                    <label class="form-check-label" for="dropdownCheck2">
-                                        Запомнить меня
-                                    </label>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Войти</button>
+
+                            <button type="submit" class="btn btn-primary">Оформить заказ</button>
                         </form>
                     </div>
                 </div>
@@ -122,7 +107,8 @@
                 <h5 class="card-title" th:text="${prod.product}"></h5>
                 <p class="card-text" th:text="${prod.title}"></p>
                 <h5 class="display-5" th:text="${prod.price}"></h5>
-                <a href="#" class="btn btn-primary">В корзину</a>
+                <a th:href="@{/product/{productId} (productId = ${prod.id})}" class="btn btn-primary">В корзину</a>
+
             </div>
         </div>
     </div>

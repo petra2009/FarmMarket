@@ -2,8 +2,6 @@ package com.example.FarmMarket.web.controller;
 
 import com.example.FarmMarket.DAO.model.Category;
 import com.example.FarmMarket.DAO.model.Product;
-import com.example.FarmMarket.DAO.repository.CategoryRepository;
-import com.example.FarmMarket.DAO.repository.ProductRepository;
 import com.example.FarmMarket.Service.CategoryService;
 import com.example.FarmMarket.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +24,7 @@ public class HomeController {
     @Autowired
     private final CategoryService categoryService;
     private final ProductService productService;
-
+    private List<Product> basket;
 
     public HomeController(CategoryService categoryService, ProductService productService) {
         this.categoryService = categoryService;
@@ -39,12 +36,16 @@ public class HomeController {
         return "admin";
     }
 
-    @GetMapping("")
-    private String getAdminPage(Model productsModel, Model categoryModel) {
+    @GetMapping("/")
+    private String getAdminPage(Model productsModel,
+                                Model categoryModel,
+                                Model basketModel) {
         Iterable<Category> categories = categoryService.findAll();
         Iterable<Product> products = productService.findAll();
         categoryModel.addAttribute("categories", categories);
         productsModel.addAttribute("products", products);
+        basketModel.addAttribute("basket", basket);
+
         return "home";
     }
     @GetMapping("/{category}")
@@ -57,6 +58,12 @@ public class HomeController {
         categoryModel.addAttribute("categories", categories);
         productsModel.addAttribute("products", products);
         return "home";
+    }
+
+    @GetMapping("/product/{productId}")
+    private String addInBasket (@PathVariable("productId") int productId) {
+        basket = productService.addInBasket(productId);
+        return "redirect:/";
     }
 
 /*    @PostMapping("serch")

@@ -11,4 +11,9 @@ import java.util.List;
 public interface ProductRepository extends CrudRepository<Product, Integer> {
 
     List<Product> findAllByCategory(Category category);
+
+    Product findProductById(int id);
+
+
+
 }
