@@ -1,4 +1,4 @@
-package com.example.FarmMarket.Service;
+package com.example.FarmMarket.service;
 
 import com.example.FarmMarket.DAO.model.Category;
 import com.example.FarmMarket.DAO.repository.CategoryRepository;
