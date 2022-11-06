@@ -5,11 +5,12 @@ import com.example.FarmMarket.DAO.model.User;
 import com.example.FarmMarket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import javax.validation.Valid;
 
 
@@ -27,22 +28,20 @@ public class RegistrationController {
         return new User();
     }
 
-    @GetMapping("/registerUser")
-    public String getRegisterPage() {
+    @GetMapping("/userRegistration")
+    public String getRegisterPage(Model model) {
+        model.addAttribute("userForm", new User());
         return "userRegistration";
     }
 
-
     @PostMapping("/userRegister")
-    public String registerUser(@Valid User user, Errors errors) {
-        if (errors.hasErrors()) {
+    public String registerUser(@Valid User user, Errors error) {
+        if (error.hasErrors()) {
+            return "userRegistration";
+        } else if (!userService.save(user)) {
             return "userRegistration";
         } else {
-            user.setRole(Role.USER);
-            userService.save(user);
-            System.out.println("Новый пользователь с логином "+user.getUsername()+" успешно зарегистрирован.");
             return "redirect:/home";
         }
     }
-
 }
