@@ -20,10 +20,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    @Override
+    /*@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     auth
             .userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
+    }*/
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .withUser("admin")
+                .password(bCryptPasswordEncoder.encode("Qwerty1234"))
+                .authorities("ADMIN")
+                .and()
+                .withUser("user")
+                .password(bCryptPasswordEncoder.encode("Qwerty12345"))
+                .authorities("USER");
     }
 
     @Override

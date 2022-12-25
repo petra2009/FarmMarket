@@ -7,7 +7,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
-
 @Entity
 @Table(name = "users")
 @Getter
@@ -21,10 +20,6 @@ public class User extends BaseEntity{
 
         @Column(name = "first_name", nullable = false, length = 45)
         private String first_name;
-/*
-        @OneToMany(mappedBy = "id")
-        private List<Product> products;
-*/
 
         @Column(unique = true, nullable = false)
         private String username;

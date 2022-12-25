@@ -1,3 +1,4 @@
+/*
 package com.example.FarmMarket.web.controller;
 
 import com.example.FarmMarket.DAO.model.Role;
@@ -45,3 +46,4 @@ public class RegistrationController {
         }
     }
 }
+*/

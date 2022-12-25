@@ -12,6 +12,9 @@
 <div th:replace="home::menu"></div>
 
 <form th:action="@{/userRegister}" method="post" th:object="${user}">
+
+    <div class="errorLogin" th:if="${param.error}" th:text="#{${err}}"></div>
+
     <div class="container mt-5">
         <div class="ml-5 form-group row">
             <label class="col-sm-4 col-form-label" for="username">Логин</label>
